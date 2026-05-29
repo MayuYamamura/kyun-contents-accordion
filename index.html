@@ -61,6 +61,46 @@
   .tip-img i { display: block; font-size: 20px; margin-bottom: 4px; color: #1a1a1a; }
 
   .foot-note { padding: 12px 20px; background: #f5f5f5; font-size: 11px; color: #888; line-height: 1.7; border-top: 0.5px solid #e0e0e0; }
+
+  /* ===== カード横並び版 ===== */
+  .section-divider { border: none; border-top: 1px dashed #ddd; margin: 3rem 0; }
+  .wrap-wide { max-width: 960px; margin: 0 auto; }
+
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+  .card { border: 0.5px solid #c0c0c0; border-radius: 12px; overflow: hidden; }
+  .card-head { padding: 20px 20px 0; }
+  .card-badge { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 99px; border: 0.5px solid #c0c0c0; color: #666; display: inline-block; margin-bottom: 12px; }
+  .card-title { font-size: 16px; font-weight: 500; color: #1a1a1a; line-height: 1.4; margin-bottom: 4px; }
+  .card-sub { font-size: 12px; color: #888; margin-bottom: 16px; }
+  .card-info { padding: 0 20px 20px; }
+  .info-row { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 10px; font-size: 13px; }
+  .info-row:last-child { margin-bottom: 0; }
+  .info-key { color: #888; white-space: nowrap; min-width: 5em; flex-shrink: 0; }
+  .info-val { color: #1a1a1a; line-height: 1.6; }
+
+  .acc-btn { width: calc(100% - 40px); margin: 0 20px 16px; display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: #1a1a1a; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 500; font-family: inherit; transition: background 0.15s; }
+  .acc-btn:hover { background: #333; }
+  .acc-btn i { font-size: 16px; transition: transform 0.2s; }
+  .acc-btn.open i { transform: rotate(180deg); }
+  .c-acc-panel { display: none; border-top: 0.5px solid #e0e0e0; }
+  .c-acc-panel.open { display: block; }
+
+  .panel-section { padding: 16px 20px; border-bottom: 0.5px solid #e0e0e0; }
+  .panel-section:last-child { border-bottom: none; }
+  .panel-label { font-size: 11px; font-weight: 500; color: #888; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .panel-text { font-size: 13px; color: #1a1a1a; line-height: 1.75; }
+
+  .map-placeholder-sm { background: #f5f5f5; border: 0.5px solid #ddd; border-radius: 8px; height: 100px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+  .map-placeholder-sm span { font-size: 12px; color: #888; }
+
+  .c-step-num { width: 24px; height: 24px; border-radius: 50%; background: #1a1a1a; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; flex-shrink: 0; }
+  .c-step-main { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: 2px; padding-top: 2px; }
+  .c-step-desc { font-size: 11px; color: #666; line-height: 1.6; }
+  .c-step-line { width: 1px; flex: 1; min-height: 16px; background: #ddd; margin: 3px 0; }
+
+  @media (max-width: 640px) {
+    .cards { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -220,6 +260,160 @@ function toggle(i){
   panel.classList.toggle('open',!isOpen);
   icon.classList.toggle('open',!isOpen);
 }
+function ctoggle(i){
+  const panel=document.getElementById('c-panel-'+i);
+  const btn=document.getElementById('c-btn-'+i);
+  const isOpen=panel.classList.contains('open');
+  panel.classList.toggle('open',!isOpen);
+  btn.classList.toggle('open',!isOpen);
+}
 </script>
+
+<!-- ===== カード横並び版 ===== -->
+<hr class="section-divider">
+<div class="wrap-wide">
+  <div class="sec-label" style="margin-bottom:1.5rem">コンテンツ＆参加方法（カード横並び版）</div>
+  <div class="cards">
+
+    <!-- ① 無償版 -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-badge">① 無償版</span>
+        <div class="card-title">無料で参加する</div>
+        <div class="card-sub">対象エリアへ行くだけでOK</div>
+      </div>
+      <div class="card-info">
+        <div class="info-row"><span class="info-key">コンテンツ</span><span class="info-val">各スポット限定トーク</span></div>
+        <div class="info-row"><span class="info-key">参加条件</span><span class="info-val">なし（無料）</span></div>
+        <div class="info-row"><span class="info-key">タグ</span><span class="info-val">
+          <span class="meta-tag">各スポット2種</span>
+          <span class="meta-tag">約30〜60秒</span>
+        </span></div>
+      </div>
+      <button class="acc-btn" id="c-btn-0" onclick="ctoggle(0)">詳細・参加方法を見る <i class="ti ti-chevron-down"></i></button>
+      <div class="c-acc-panel" id="c-panel-0">
+        <div class="panel-section">
+          <div class="panel-label">コンテンツ内容</div>
+          <div class="panel-text">各スポットで俺クロキャラクターによる限定トークが聴ける音声コンテンツ。スポットにちなんだオリジナルストーリーを楽しめます。</div>
+        </div>
+        <div class="panel-section">
+          <div class="panel-label">対象スポット</div>
+          <div class="map-placeholder-sm"><span><i class="ti ti-map-2" style="font-size:16px;vertical-align:-3px;margin-right:5px"></i>マップ（実装時に表示）</span></div>
+          <div class="spot-list">
+            <div class="spot-row"><i class="ti ti-map-pin"></i>ウィング高輪<span class="spot-sub">品川駅直結</span></div>
+            <div class="spot-row"><i class="ti ti-map-pin"></i>京急百貨店<span class="spot-sub">上大岡駅直結</span></div>
+            <div class="spot-row"><i class="ti ti-map-pin"></i>逗子・葉山エリア<span class="spot-sub">複数スポット</span></div>
+            <div class="spot-row"><i class="ti ti-map-pin"></i>羽田空港第3ターミナル</div>
+          </div>
+        </div>
+        <div class="panel-section">
+          <div class="panel-label">ご利用の流れ</div>
+          <div class="steps">
+            <div class="step"><div class="step-left"><div class="c-step-num">1</div><div class="c-step-line"></div></div><div class="step-content"><div class="c-step-main">対象スポットへ移動する</div><div class="c-step-desc">上記いずれかのスポットへお越しください。</div></div></div>
+            <div class="step"><div class="step-left"><div class="c-step-num">2</div><div class="c-step-line"></div></div><div class="step-content"><div class="c-step-main">QRコードを読み取る or GPS連動で自動開始</div><div class="c-step-desc">ポスター・看板のQRを読み取るか、GPS連動で自動起動します。</div></div></div>
+            <div class="step"><div class="step-left"><div class="c-step-num">3</div></div><div class="step-content"><div class="c-step-main">音声コンテンツをお楽しみください</div><div class="c-step-desc">Locatone（ロケトーン）のページへ遷移します。</div></div></div>
+          </div>
+        </div>
+        <div class="foot-note">※スマートフォンとイヤホンをご用意ください。通信料はお客様負担となります。</div>
+      </div>
+    </div>
+
+    <!-- ② 有償版 -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-badge">② 有償版</span>
+        <div class="card-title">記念きっぷで参加する</div>
+        <div class="card-sub">限定音声コンテンツが解放される</div>
+      </div>
+      <div class="card-info">
+        <div class="info-row"><span class="info-key">コンテンツ</span><span class="info-val">有償版限定トーク</span></div>
+        <div class="info-row"><span class="info-key">参加条件</span><span class="info-val">記念きっぷ購入</span></div>
+        <div class="info-row"><span class="info-key">タグ</span><span class="info-val">
+          <span class="meta-tag">各スポット1種</span>
+          <span class="meta-tag">約1〜2分</span>
+        </span></div>
+      </div>
+      <button class="acc-btn" id="c-btn-1" onclick="ctoggle(1)">詳細・参加方法を見る <i class="ti ti-chevron-down"></i></button>
+      <div class="c-acc-panel" id="c-panel-1">
+        <div class="panel-section">
+          <div class="panel-label">コンテンツ内容</div>
+          <div class="panel-text">無償版に加え、有償版限定の特別音声コンテンツが解放されます。各スポット1種、より深いストーリーをお楽しみいただけます。</div>
+        </div>
+        <div class="panel-section">
+          <div class="panel-label">対象スポット</div>
+          <div class="map-placeholder-sm"><span><i class="ti ti-map-2" style="font-size:16px;vertical-align:-3px;margin-right:5px"></i>マップ（実装時に表示）</span></div>
+          <div class="spot-list">
+            <div class="spot-row"><i class="ti ti-map-pin"></i>ウィング高輪<span class="spot-sub">品川駅直結</span></div>
+            <div class="spot-row"><i class="ti ti-map-pin"></i>京急百貨店<span class="spot-sub">上大岡駅直結</span></div>
+            <div class="spot-row"><i class="ti ti-map-pin"></i>逗子・葉山エリア<span class="spot-sub">複数スポット</span></div>
+            <div class="spot-row"><i class="ti ti-map-pin"></i>羽田空港第3ターミナル</div>
+          </div>
+        </div>
+        <div class="panel-section">
+          <div class="panel-label">ご利用の流れ</div>
+          <div class="steps">
+            <div class="step"><div class="step-left"><div class="c-step-num">1</div><div class="c-step-line"></div></div><div class="step-content"><div class="c-step-main">記念きっぷを購入する</div><div class="c-step-desc">○○駅窓口・京急百貨店 等にて販売中。台紙にシリアルコードが印字されています。</div></div></div>
+            <div class="step"><div class="step-left"><div class="c-step-num">2</div><div class="c-step-line"></div></div><div class="step-content"><div class="c-step-main">シリアルコードを入力する</div><div class="c-step-desc">台紙に記載された英数字コードを入力してください。</div></div></div>
+            <div class="step"><div class="step-left"><div class="c-step-num">3</div><div class="c-step-line"></div></div><div class="step-content"><div class="c-step-main">対象スポットへ移動する</div><div class="c-step-desc">QRコード読み取り、またはGPS連動で起動します。</div></div></div>
+            <div class="step"><div class="step-left"><div class="c-step-num">4</div></div><div class="step-content"><div class="c-step-main">限定音声コンテンツをお楽しみください</div><div class="c-step-desc">有償版限定コンテンツが解放されます。</div></div></div>
+          </div>
+        </div>
+        <div class="foot-note">※記念きっぷは数量限定です。なくなり次第終了となります。</div>
+      </div>
+    </div>
+
+    <!-- ③ ウィング号版 -->
+    <div class="card">
+      <div class="card-head">
+        <span class="card-badge">③ ウィング号版</span>
+        <div class="card-title">ウィング号に乗って参加する</div>
+        <div class="card-sub">乗車キャンペーン連動コンテンツ</div>
+      </div>
+      <div class="card-info">
+        <div class="info-row"><span class="info-key">コンテンツ</span><span class="info-val">乗車限定トーク</span></div>
+        <div class="info-row"><span class="info-key">参加条件</span><span class="info-val">ウィング号乗車＋フォーム回答</span></div>
+        <div class="info-row"><span class="info-key">タグ</span><span class="info-val">
+          <span class="meta-tag">1種</span>
+          <span class="meta-tag">約1分</span>
+        </span></div>
+      </div>
+      <button class="acc-btn" id="c-btn-2" onclick="ctoggle(2)">詳細・参加方法を見る <i class="ti ti-chevron-down"></i></button>
+      <div class="c-acc-panel" id="c-panel-2">
+        <div class="panel-section">
+          <div class="panel-label">コンテンツ内容</div>
+          <div class="panel-text">ウィング号乗車キャンペーン連動の特別音声コンテンツ。俺クロキャラクターが車内での移動を盛り上げるオリジナルトークをお届けします。</div>
+        </div>
+        <div class="panel-section">
+          <div class="panel-label">対象区間</div>
+          <div class="map-placeholder-sm"><span><i class="ti ti-map-2" style="font-size:16px;vertical-align:-3px;margin-right:5px"></i>路線図（実装時に表示）</span></div>
+          <div class="spot-list">
+            <div class="spot-row"><i class="ti ti-train"></i>品川 → 上大岡（快特停車駅間）</div>
+          </div>
+        </div>
+        <div class="panel-section">
+          <div class="panel-label">ご利用の流れ</div>
+          <div class="steps">
+            <div class="step"><div class="step-left"><div class="c-step-num">1</div><div class="c-step-line"></div></div><div class="step-content"><div class="c-step-main">ウィング号に乗車する</div><div class="c-step-desc">品川〜上大岡間が対象です。事前にウィングチケットをご購入ください。</div></div></div>
+            <div class="step"><div class="step-left"><div class="c-step-num">2</div><div class="c-step-line"></div></div><div class="step-content">
+              <div class="c-step-main">アンケートフォームに回答する</div>
+              <div class="c-step-desc">乗車有無と「お問合せ番号（16桁）」を入力してください。</div>
+              <div class="tip-box">
+                <div class="tip-label">お問合せ番号の確認方法</div>
+                <div class="tip-img-row">
+                  <div class="tip-img"><i class="ti ti-mail"></i>購入確認メール</div>
+                  <div class="tip-img"><i class="ti ti-ticket"></i>紙チケット</div>
+                  <div class="tip-img"><i class="ti ti-device-mobile"></i>Wing Ticketアプリ</div>
+                </div>
+              </div>
+            </div></div>
+            <div class="step"><div class="step-left"><div class="c-step-num">3</div></div><div class="step-content"><div class="c-step-main">送信して音声コンテンツへ</div><div class="c-step-desc">フォーム送信後すぐに視聴ページへ遷移します。</div></div></div>
+          </div>
+        </div>
+        <div class="foot-note">※「ウィング号で楽しもう！」キャンペーンです。お問合せ番号の実際のご利用データとの照合は行っておりません。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
 </body>
 </html>
