@@ -1,4 +1,5 @@
 # キュン旅ポータル｜コンテンツ＆参加方法 セクション サンプル
+https://mayuyamamura.github.io/kyun-contents-accordion/
 
 京急「キュン旅」ポータルサイト IP個別CPページの「コンテンツ＆参加方法」セクションのUIサンプルです。
 
