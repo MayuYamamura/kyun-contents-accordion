@@ -4,6 +4,57 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>俺クロ × 京急 キュン旅｜コンテンツ＆参加方法</title>
+<style>
+  #auth-overlay {
+    position: fixed; inset: 0; background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+  }
+  #auth-box {
+    width: 300px; text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif;
+  }
+  #auth-box p { font-size: 13px; color: #888; margin-bottom: 20px; }
+  #auth-input {
+    width: 100%; padding: 10px 14px; font-size: 15px;
+    border: 0.5px solid #c0c0c0; border-radius: 8px;
+    outline: none; margin-bottom: 10px; text-align: center;
+    letter-spacing: 0.1em;
+  }
+  #auth-input:focus { border-color: #1a1a1a; }
+  #auth-btn {
+    width: 100%; padding: 10px; font-size: 14px; font-weight: 500;
+    background: #1a1a1a; color: #fff; border: none; border-radius: 8px;
+    cursor: pointer;
+  }
+  #auth-btn:hover { background: #333; }
+  #auth-error { font-size: 12px; color: #c00; margin-top: 8px; display: none; }
+</style>
+<script>
+  (function() {
+    var PW = 'kyuntabi';
+    var KEY = 'auth_ok';
+    if (sessionStorage.getItem(KEY) === '1') return;
+    document.addEventListener('DOMContentLoaded', function() {
+      var overlay = document.getElementById('auth-overlay');
+      var input = document.getElementById('auth-input');
+      var error = document.getElementById('auth-error');
+      document.getElementById('auth-btn').addEventListener('click', function() {
+        if (input.value === PW) {
+          sessionStorage.setItem(KEY, '1');
+          overlay.remove();
+        } else {
+          error.style.display = 'block';
+          input.value = '';
+          input.focus();
+        }
+      });
+      input.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') document.getElementById('auth-btn').click();
+      });
+    });
+  })();
+</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -149,6 +200,14 @@
 </style>
 </head>
 <body>
+<div id="auth-overlay">
+  <div id="auth-box">
+    <p>パスワードを入力してください</p>
+    <input id="auth-input" type="password" placeholder="password" autocomplete="current-password">
+    <button id="auth-btn">入力</button>
+    <div id="auth-error">パスワードが違います</div>
+  </div>
+</div>
 
 <!-- ページヘッダー -->
 <div class="page-header">
